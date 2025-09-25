@@ -6,7 +6,7 @@ import { catchError, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UploadService {
-  private apiUrl = 'http://localhost:5167/api/MeterReading/meter-reading-uploads'; 
+  private apiUrl = 'https://dinesh001-appservice-cnbrcafcadcfe5eg.canadacentral-01.azurewebsites.net/api/MeterReading/meter-reading-uploads'; 
 
   constructor(private http: HttpClient) {}
 
