@@ -27,17 +27,17 @@ loading = false;
     return;
   }
 
-  this.loading = true;          // show processing
+  this.loading = true;         
   this.message = 'Processing...';
 
   this.uploadService.uploadCSV(this.selectedFile).subscribe({
     next: (res: any) => {
       this.message = `Uploaded Success: ${res.successCount}, Failed: ${res.failureCount}`;
-      this.loading = false;     // done processing
+      this.loading = false;     
     },
     error: (err: any) => {
       this.message = `Upload failed: ${err}`;
-      this.loading = false;     // done processing
+      this.loading = false;    
     }
   });
 
