@@ -13,7 +13,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class UploadComponent {
 selectedFile: File | null = null;
   message = '';
-
+loading = false;
   constructor(private uploadService: UploadService) {}
 
   onFileSelected(event: Event) {
@@ -22,18 +22,24 @@ selectedFile: File | null = null;
   }
 
   upload() {
-    if (!this.selectedFile) {
-      this.message = 'Please select a CSV file.';
-      return;
-    }
+  if (!this.selectedFile) {
+    this.message = 'Please select a CSV file.';
+    return;
+  }
 
-    this.uploadService.uploadCSV(this.selectedFile).subscribe({
-      next: (res: any) => {
-        this.message = `Uploaded Success: ${res.successCount}, Failed: ${res.failureCount}`;
-      },
-      error: (err: any) => {
-        this.message = `Upload failed: ${err}`;
-      }
-    });
+  this.loading = true;          // show processing
+  this.message = 'Processing...';
+
+  this.uploadService.uploadCSV(this.selectedFile).subscribe({
+    next: (res: any) => {
+      this.message = `Uploaded Success: ${res.successCount}, Failed: ${res.failureCount}`;
+      this.loading = false;     // done processing
+    },
+    error: (err: any) => {
+      this.message = `Upload failed: ${err}`;
+      this.loading = false;     // done processing
+    }
+  });
+
   }
 }

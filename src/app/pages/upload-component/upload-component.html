@@ -2,6 +2,6 @@
 <div>
   <h2>Upload CSV File</h2>
   <input type="file" (change)="onFileSelected($event)" />
-  <button (click)="upload()">Upload</button>
+  <button (click)="upload()" [disabled]="loading">Upload</button>
   <p>{{ message }}</p>
 </div>
