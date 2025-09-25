@@ -26,6 +26,15 @@ loading = false;
     this.message = 'Please select a CSV file.';
     return;
   }
+     if (!this.selectedFile.name.toLowerCase().endsWith('.csv')) {
+    this.message = 'Only CSV files are allowed.';
+    return;
+  }
+
+  if (this.selectedFile.size > 5 * 1024 * 1024) {
+    this.message = 'File size exceeds 5MB limit.';
+    return;  
+  }
 
   this.loading = true;         
   this.message = 'Processing...';
